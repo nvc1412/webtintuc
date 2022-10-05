@@ -15,7 +15,7 @@
 require 'posts_connect.php';
 // Up bài viết
 if (isset($_POST['btn_submit'])) {
-    $id=$_GET['id'];
+    $id= isset($_GET['id']) ? $_GET['id'] : 0;
     $title = $_POST['title'];
 $url = $_POST['url'];
     $content = $_POST['content'];
@@ -26,8 +26,9 @@ $url = $_POST['url'];
     $file_size = $_FILES['image']['size'];
     $file_tmp = $_FILES['image']['tmp_name'];
     $file_type = $_FILES['image']['type'];
-    $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
-           
+    $arrTmp = explode('.', $_FILES['image']['name']);
+    $tmp = end($arrTmp);
+    $file_ext=strtolower($tmp);
     $expensions= array("jpeg","jpg","png");
            
     if(in_array($file_ext,$expensions)=== false){
